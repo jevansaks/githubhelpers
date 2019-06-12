@@ -87,8 +87,8 @@ function Get-CompletedPRsInCommitRange
         [Parameter(Mandatory=$true, Position=1)][string]$end,
         [string]$orgRepo = "microsoft/microsoft-ui-xaml")
 
-    $startCommit = Get-CommitShaForRevParse $start
-    $endCommit = Get-CommitShaForRevParse $end
+    $startCommit = Get-CommitShaForRevParse $start -orgRepo $orgRepo
+    $endCommit = Get-CommitShaForRevParse $end -orgRepo $orgRepo
 
     Write-Verbose "Looking for start = $start ($startCommit)"
     Write-Verbose "Looking for end = $end ($endCommit)"
