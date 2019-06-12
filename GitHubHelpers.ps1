@@ -1,16 +1,20 @@
 [CmdLetBinding()]
 Param()
 
-function Set-GraphQLPersonalAccessToken
+function Set-GitHubPersonalAccessToken
 {
   [CmdLetBinding()]
   Param(
     [Parameter(Mandatory=$true)]$personalAccessToken)
 
+  if (-not (Test-Path "HKCU:\Software\WinUIGitHub"))
+  {
+    New-Item "HKCU:\Software\WinUIGitHub"
+  }
   New-ItemProperty -Path "HKCU:\Software\WinUIGitHub" -Name "GraphQLPersonalAccessToken" -Value $personalAccessToken -Force | Write-Verbose
 }
 
-function Get-GraphQLPersonalAccessToken
+function Get-GitHubPersonalAccessToken
 {
   [CmdLetBinding()]
   Param()
@@ -32,7 +36,7 @@ function Get-GitHubGraphQLResults
         [string]$operationName,
         [Hashtable]$variables)
 
-    $graphQLPersonalAccessToken = Get-GraphQLPersonalAccessToken
+    $graphQLPersonalAccessToken = Get-GitHubPersonalAccessToken
 
     $headers = @{
         "Authorization"="bearer $graphQLPersonalAccessToken";
