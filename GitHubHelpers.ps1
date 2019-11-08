@@ -216,7 +216,7 @@ function Get-ReleaseReport
         [Parameter(Mandatory=$true, Position=1)][Alias("end")][string]$endCommit,
         [string]$orgRepo = "microsoft/microsoft-ui-xaml",
         [string]$labelFilter = "release note",
-        [string]$featureLabel = "feature request")
+        [string]$featureLabel = "feature proposal")
 
     $organization,$repo = $orgRepo -split "/"
     $results = Get-CompletedPRsInCommitRange -start $startCommit -end $endCommit -orgRepo $orgRepo
